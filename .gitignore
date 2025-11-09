@@ -15,7 +15,7 @@ desktop.ini
 *~
 
 # Log Files
-logs/
+logs/*.log
 *.log
 
 # Cache Files
