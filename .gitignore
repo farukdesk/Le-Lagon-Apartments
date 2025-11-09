@@ -39,7 +39,6 @@ temp/
 
 # Uploaded Files (you may want to keep these, adjust as needed)
 uploads/
-public/uploads/
 
 # Vendor/Dependencies
 vendor/

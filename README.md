@@ -50,18 +50,19 @@ Le-Lagon-Apartments/
 │       ├── Router.php
 │       ├── Controller.php
 │       └── Model.php
+├── assets/               # Static assets (CSS, JS, images)
+│   ├── css/
+│   ├── js/
+│   └── imgs/
 ├── config/
 │   └── database.php      # Database configuration
 ├── database/
 │   ├── schema.sql        # Database schema
 │   └── sample_data.sql   # Sample content
-├── public/               # Web root (point your domain here)
-│   ├── index.php         # Application entry point
-│   └── .htaccess         # URL rewriting rules
-├── assets/               # Static assets (CSS, JS, images)
-│   ├── css/
-│   ├── js/
-│   └── imgs/
+├── logs/                 # Application logs
+│   └── error.log
+├── index.php             # Application entry point
+├── .htaccess             # URL rewriting rules
 ├── .gitignore
 └── README.md
 ```
@@ -71,7 +72,19 @@ Le-Lagon-Apartments/
 ### Step 1: Upload Files
 
 1. Upload all files to your web hosting server
-2. Point your domain to the `/public` directory
+2. All files should be placed directly in your `public_html` or web root directory
+3. The directory structure should look like:
+   ```
+   /home/yourusername/public_html/
+   ├── index.php
+   ├── .htaccess
+   ├── assets/
+   ├── app/
+   ├── config/
+   ├── database/
+   ├── logs/
+   └── ...
+   ```
 
 ### Step 2: Database Setup
 
@@ -103,9 +116,11 @@ Ensure your Apache has `mod_rewrite` enabled. If using shared hosting, the `.hta
 ### Step 5: Set Permissions
 
 ```bash
-chmod 755 public/
-chmod 644 public/index.php
-chmod 644 public/.htaccess
+chmod 755 .
+chmod 644 index.php
+chmod 644 .htaccess
+chmod 755 logs/
+chmod 666 logs/error.log
 ```
 
 ## Usage
@@ -193,8 +208,8 @@ The system includes comprehensive database tables:
 ### 404 Errors
 
 - Ensure `mod_rewrite` is enabled in Apache
-- Check `.htaccess` file in `/public` directory
-- Verify document root points to `/public`
+- Check `.htaccess` file is in the root directory
+- Verify all files are uploaded to the web root (public_html)
 
 ### Database Connection Errors
 
@@ -204,8 +219,8 @@ The system includes comprehensive database tables:
 
 ### Blank Page
 
-- Enable error reporting in `public/index.php` temporarily
-- Check PHP error logs
+- Enable error reporting in `index.php` temporarily
+- Check PHP error logs in `logs/error.log`
 - Verify all required files are uploaded
 
 ## Future Enhancements

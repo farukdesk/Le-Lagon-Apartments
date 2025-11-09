@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../components/header.php';
 ?>
 
-<section class="breadcrumb__area pt-200 pb-150" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/public/assets/imgs/slider/bg-9.jpg); background-size: cover; background-position: center;">
+<section class="breadcrumb__area pt-200 pb-150" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/assets/imgs/slider/bg-9.jpg); background-size: cover; background-position: center;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
