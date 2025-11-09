@@ -145,24 +145,24 @@ $socialLinks = $socialModel->getActiveLinks();
 <!-- Footer Area End -->
 
 <!-- JavaScript Files -->
-<script src="/assets/js/vendor/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/plugins/waypoints.min.js"></script>
-<script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/plugins/meanmenu.min.js"></script>
 <script src="/assets/js/plugins/swiper.min.js"></script>
 <script src="/assets/js/plugins/wow.js"></script>
-<script src="/assets/js/vendor/magnific-popup.min.js"></script>
-<script src="/assets/js/vendor/type.js"></script>
-<script src="/assets/js/vendor/vanilla-tilt.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 <script src="/assets/js/plugins/nice-select.min.js"></script>
-<script src="/assets/js/vendor/odometer.min.js"></script>
-<script src="/assets/js/vendor/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/odometer.min.js"></script>
 <script src="/assets/js/plugins/parallax-scroll.js"></script>
 <script src="/assets/js/plugins/jquery.countdown.min.js"></script>
-<script src="/assets/js/vendor/smooth-scroll.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/smoothscroll/1.4.10/SmoothScroll.min.js"></script>
 <script src="/assets/js/plugins/isotope-docs.min.js"></script>
 <script src="/assets/js/plugins/slick.min.js"></script>
-<script src="/assets/js/vendor/ajax-form.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
 <script src="/assets/js/main.js"></script>
 
 </body>

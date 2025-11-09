@@ -32,15 +32,13 @@ $socialLinks = $socialModel->getActiveLinks();
     <link href="https://fonts.googleapis.com/css2?family=Sofia&display=swap" rel="stylesheet">
     
     <!-- CSS Files -->
-    <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/plugins/slick.css">
-    <link rel="stylesheet" href="/assets/css/vendor/animate.min.css">
-    <link rel="stylesheet" href="/assets/css/vendor/odometer.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.8/themes/odometer-theme-default.min.css">
     <link rel="stylesheet" href="/assets/css/plugins/swiper.min.css">
-    <link rel="stylesheet" href="/assets/css/vendor/magnific-popup.css">
-    <link rel="stylesheet" href="/assets/css/vendor/fontawesome-pro.css"> 
-    <link rel="stylesheet" href="/assets/css/vendor/spacing.css">
-    <link rel="stylesheet" href="/assets/css/vendor/custom-font.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/font-awesome-pro.css"> 
     <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 
