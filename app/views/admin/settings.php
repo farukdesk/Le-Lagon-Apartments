@@ -31,7 +31,8 @@
         <h3>Le Lagon CMS</h3>
         <ul>
             <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-            <li><a href="/admin/slider" class="active"><i class="fa fa-images"></i> Hero Slider</a></li>
+            <li><a href="/admin/cms"><i class="fa fa-edit"></i> CMS</a></li>
+            <li><a href="/admin/slider"><i class="fa fa-images"></i> Hero Slider</a></li>
             <li><a href="/admin/about"><i class="fa fa-info-circle"></i> About Section</a></li>
             <li><a href="/admin/services"><i class="fa fa-concierge-bell"></i> Services</a></li>
             <li><a href="/admin/rooms"><i class="fa fa-bed"></i> Rooms</a></li>

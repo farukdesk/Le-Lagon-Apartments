@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $pageTitle ?? 'Manage Hero Section'; ?></title>
+    <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/vendor/fontawesome-pro.css">
+    <style>
+        body { background: #f5f6fa; font-family: 'Arial', sans-serif; margin: 0; padding: 0; }
+        
+        /* Responsive Sidebar */
+        .sidebar { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            height: 100vh; 
+            width: 250px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            color: white; 
+            padding: 20px; 
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .sidebar h3 { margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.2); font-size: 1.2rem; }
+        .sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar ul li { margin-bottom: 10px; }
+        .sidebar ul li a { 
+            color: white; 
+            text-decoration: none; 
+            padding: 12px 15px; 
+            display: block; 
+            border-radius: 8px; 
+            transition: background 0.3s;
+            font-size: 0.9rem;
+        }
+        .sidebar ul li a:hover, .sidebar ul li a.active { background: rgba(255,255,255,0.2); }
+        .sidebar ul li a i { margin-right: 8px; width: 20px; }
+        
+        /* Mobile menu toggle */
+        .menu-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        
+        .main-content { 
+            margin-left: 250px; 
+            padding: 30px;
+            transition: margin-left 0.3s ease;
+        }
+        .header { 
+            background: white; 
+            padding: 20px 30px; 
+            border-radius: 10px; 
+            margin-bottom: 30px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+        }
+        .header h1 { margin: 0; color: #333; font-size: 1.8rem; }
+        .content-box { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            margin-bottom: 20px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table { 
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th { 
+            background: #667eea; 
+            color: white; 
+            padding: 12px; 
+            text-align: left;
+            font-size: 14px;
+        }
+        td { 
+            padding: 12px; 
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+        .btn { 
+            padding: 8px 16px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            display: inline-block; 
+            margin-right: 5px;
+            margin-bottom: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.3s;
+        }
+        .btn-sm { padding: 6px 12px; font-size: 12px; }
+        .btn-primary { background: #667eea; color: white; }
+        .btn-primary:hover { background: #5568d3; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-success:hover { background: #218838; }
+        .btn-danger { background: #dc3545; color: white; }
+        .btn-danger:hover { background: #c82333; }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn-secondary:hover { background: #5a6268; }
+        
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .alert-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+        .alert-error {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            color: #721c24;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+        .modal-content {
+            background: white;
+            margin: 30px auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 700px;
+            width: 90%;
+        }
+        .modal-header {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .modal-header h2 {
+            margin: 0;
+            color: #333;
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: #333; 
+            font-weight: 600;
+        }
+        .form-control { 
+            width: 100%; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        textarea.form-control {
+            min-height: 80px;
+            resize: vertical;
+        }
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-wrapper input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 20px; padding-top: 60px; }
+            .header h1 { font-size: 1.5rem; }
+            .content-box { padding: 20px; }
+            table { font-size: 12px; }
+            th, td { padding: 8px; }
+            .modal-content { margin: 20px auto; padding: 20px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header { padding: 15px 20px; }
+            .btn { padding: 6px 12px; font-size: 11px; }
+            th, td { padding: 6px; font-size: 11px; }
+            .table-responsive { font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa fa-bars"></i> Menu
+    </button>
+    
+    <div class="sidebar" id="sidebar">
+        <h3>Le Lagon CMS</h3>
+        <ul>
+            <li><a href="/admin/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="/admin/cms"><i class="fa fa-edit"></i> CMS</a></li>
+            <li><a href="/admin/slider"><i class="fa fa-images"></i> Hero Slider</a></li>
+            <li><a href="/admin/about"><i class="fa fa-info-circle"></i> About Section</a></li>
+            <li><a href="/admin/services"><i class="fa fa-concierge-bell"></i> Services</a></li>
+            <li><a href="/admin/rooms"><i class="fa fa-bed"></i> Rooms</a></li>
+            <li><a href="/admin/footer"><i class="fa fa-align-justify"></i> Footer</a></li>
+            <li><a href="/admin/settings"><i class="fa fa-cog"></i> Settings</a></li>
+            <li><a href="/admin/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+        </ul>
+    </div>
+    
+    <div class="main-content" id="mainContent">
+        <div class="header">
+            <h1>Manage Hero Section</h1>
+            <p style="margin: 10px 0 0 0; color: #666;">Manage hero background images, titles, and content</p>
+        </div>
+        
+        <?php if (!empty($success)): ?>
+            <div class="alert alert-success">
+                <i class="fa fa-check-circle"></i> <?php echo htmlspecialchars($success); ?>
+            </div>
+        <?php endif; ?>
+        
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-error">
+                <i class="fa fa-exclamation-circle"></i> <?php echo htmlspecialchars($error); ?>
+            </div>
+        <?php endif; ?>
+        
+        <div class="content-box">
+            <div style="margin-bottom: 20px;">
+                <button onclick="openCreateModal()" class="btn btn-success">
+                    <i class="fa fa-plus"></i> Add New Hero Slide
+                </button>
+                <a href="/admin/cms" class="btn btn-secondary">
+                    <i class="fa fa-arrow-left"></i> Back to CMS
+                </a>
+            </div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Subtitle</th>
+                            <th>Order</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($slides)): ?>
+                            <?php foreach ($slides as $slide): ?>
+                                <tr>
+                                    <td><?php echo $slide['id']; ?></td>
+                                    <td>
+                                        <img src="/<?php echo htmlspecialchars($slide['image_path']); ?>" 
+                                             style="width: 80px; height: 50px; object-fit: cover; border-radius: 4px;">
+                                    </td>
+                                    <td><?php echo htmlspecialchars($slide['title']); ?></td>
+                                    <td><?php echo htmlspecialchars($slide['subtitle'] ?? '-'); ?></td>
+                                    <td><?php echo $slide['slider_order']; ?></td>
+                                    <td>
+                                        <?php if ($slide['is_active']): ?>
+                                            <span style="color: green; font-weight: 600;">Active</span>
+                                        <?php else: ?>
+                                            <span style="color: red; font-weight: 600;">Inactive</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <button onclick='openEditModal(<?php echo json_encode($slide); ?>)' class="btn btn-primary btn-sm">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </button>
+                                        <button onclick="confirmDelete(<?php echo $slide['id']; ?>, '<?php echo htmlspecialchars($slide['title']); ?>')" class="btn btn-danger btn-sm">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="7" style="text-align: center; color: #666;">
+                                    No hero slides found. Click "Add New Hero Slide" to create one.
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Create Modal -->
+    <div id="createModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa fa-plus"></i> Add New Hero Slide</h2>
+            </div>
+            <form method="POST" action="/admin/cms/hero/create" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="create_image">Background Image *</label>
+                    <input type="file" id="create_image" name="image" class="form-control" accept="image/*" required>
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        Recommended size: 1920x1080px or larger
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="create_title">Title *</label>
+                    <input type="text" id="create_title" name="title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="create_subtitle">Subtitle</label>
+                    <input type="text" id="create_subtitle" name="subtitle" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="create_description">Description</label>
+                    <textarea id="create_description" name="description" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="create_button_text">Button Text</label>
+                    <input type="text" id="create_button_text" name="button_text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="create_button_link">Button Link</label>
+                    <input type="text" id="create_button_link" name="button_link" class="form-control" placeholder="/rooms">
+                </div>
+                <div class="form-group">
+                    <label for="create_slider_order">Order</label>
+                    <input type="number" id="create_slider_order" name="slider_order" class="form-control" value="0">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="create_is_active" name="is_active" checked>
+                        <label for="create_is_active" style="margin: 0;">Active</label>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Create Hero Slide
+                    </button>
+                    <button type="button" onclick="closeCreateModal()" class="btn btn-secondary">
+                        <i class="fa fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fa fa-edit"></i> Edit Hero Slide</h2>
+            </div>
+            <form method="POST" action="/admin/cms/hero/update" enctype="multipart/form-data">
+                <input type="hidden" id="edit_id" name="id">
+                <div class="form-group">
+                    <label>Current Image</label>
+                    <div id="current_image_preview" style="margin-bottom: 10px;"></div>
+                    <label for="edit_image">Upload New Image (optional)</label>
+                    <input type="file" id="edit_image" name="image" class="form-control" accept="image/*">
+                    <small style="color: #666; display: block; margin-top: 5px;">
+                        Leave empty to keep current image
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="edit_title">Title *</label>
+                    <input type="text" id="edit_title" name="title" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit_subtitle">Subtitle</label>
+                    <input type="text" id="edit_subtitle" name="subtitle" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="edit_description">Description</label>
+                    <textarea id="edit_description" name="description" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="edit_button_text">Button Text</label>
+                    <input type="text" id="edit_button_text" name="button_text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="edit_button_link">Button Link</label>
+                    <input type="text" id="edit_button_link" name="button_link" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="edit_slider_order">Order</label>
+                    <input type="number" id="edit_slider_order" name="slider_order" class="form-control">
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="edit_is_active" name="is_active">
+                        <label for="edit_is_active" style="margin: 0;">Active</label>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i> Update Hero Slide
+                    </button>
+                    <button type="button" onclick="closeEditModal()" class="btn btn-secondary">
+                        <i class="fa fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Delete Form -->
+    <form id="deleteForm" method="POST" action="/admin/cms/hero/delete" style="display: none;">
+        <input type="hidden" id="delete_id" name="id">
+    </form>
+    
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target) &&
+                sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+        
+        function openCreateModal() {
+            document.getElementById('createModal').style.display = 'block';
+        }
+        
+        function closeCreateModal() {
+            document.getElementById('createModal').style.display = 'none';
+        }
+        
+        function openEditModal(slide) {
+            document.getElementById('edit_id').value = slide.id;
+            document.getElementById('edit_title').value = slide.title;
+            document.getElementById('edit_subtitle').value = slide.subtitle || '';
+            document.getElementById('edit_description').value = slide.description || '';
+            document.getElementById('edit_button_text').value = slide.button_text || '';
+            document.getElementById('edit_button_link').value = slide.button_link || '';
+            document.getElementById('edit_slider_order').value = slide.slider_order;
+            document.getElementById('edit_is_active').checked = slide.is_active == 1;
+            
+            // Show current image
+            const imagePreview = document.getElementById('current_image_preview');
+            imagePreview.innerHTML = '<img src="/' + slide.image_path + '" style="width: 200px; height: auto; border-radius: 4px;">';
+            
+            document.getElementById('editModal').style.display = 'block';
+        }
+        
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+        
+        function confirmDelete(id, title) {
+            if (confirm('Are you sure you want to delete "' + title + '"?')) {
+                document.getElementById('delete_id').value = id;
+                document.getElementById('deleteForm').submit();
+            }
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const createModal = document.getElementById('createModal');
+            const editModal = document.getElementById('editModal');
+            if (event.target == createModal) {
+                closeCreateModal();
+            }
+            if (event.target == editModal) {
+                closeEditModal();
+            }
+        }
+    </script>
+</body>
+</html>

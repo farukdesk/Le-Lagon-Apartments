@@ -10,7 +10,25 @@
         body {
             background: #f5f6fa;
             font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
+        
+        /* Mobile menu toggle */
+        .menu-toggle {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        
         .sidebar {
             position: fixed;
             top: 0;
@@ -21,15 +39,20 @@
             color: white;
             padding: 20px;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
         }
         .sidebar h3 {
             margin-bottom: 30px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(255,255,255,0.2);
+            font-size: 1.2rem;
         }
         .sidebar ul {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
         .sidebar ul li {
             margin-bottom: 10px;
@@ -41,14 +64,20 @@
             display: block;
             border-radius: 8px;
             transition: background 0.3s;
+            font-size: 0.9rem;
         }
         .sidebar ul li a:hover,
         .sidebar ul li a.active {
             background: rgba(255,255,255,0.2);
         }
+        .sidebar ul li a i {
+            margin-right: 8px;
+            width: 20px;
+        }
         .main-content {
             margin-left: 250px;
             padding: 30px;
+            transition: margin-left 0.3s ease;
         }
         .header {
             background: white;
@@ -59,15 +88,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
         .header h1 {
             margin: 0;
             color: #333;
-            font-size: 28px;
+            font-size: 1.8rem;
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
             margin-bottom: 30px;
         }
@@ -100,7 +130,7 @@
         }
         .action-buttons {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 15px;
         }
         .action-btn {
@@ -136,13 +166,42 @@
             background: rgba(255,255,255,0.3);
             color: white;
         }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); }
+            .main-content { margin-left: 0; padding: 20px; padding-top: 60px; }
+            .header { 
+                padding: 15px 20px; 
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .header h1 { font-size: 1.5rem; margin-bottom: 10px; }
+            .stats-grid { grid-template-columns: 1fr; gap: 15px; }
+            .action-buttons { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+            .stat-card { padding: 15px; }
+            .stat-card .value { font-size: 24px; }
+            .quick-actions { padding: 15px; }
+            .action-btn { padding: 15px; }
+            .action-btn i { font-size: 20px; }
+        }
     </style>
 </head>
 <body>
-    <div class="sidebar">
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fa fa-bars"></i> Menu
+    </button>
+    
+    <div class="sidebar" id="sidebar">
         <h3>Le Lagon CMS</h3>
         <ul>
             <li><a href="/admin/dashboard" class="active"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="/admin/cms"><i class="fa fa-edit"></i> CMS</a></li>
             <li><a href="/admin/slider"><i class="fa fa-images"></i> Hero Slider</a></li>
             <li><a href="/admin/about"><i class="fa fa-info-circle"></i> About Section</a></li>
             <li><a href="/admin/services"><i class="fa fa-concierge-bell"></i> Services</a></li>
@@ -183,6 +242,10 @@
         <div class="quick-actions">
             <h2>Quick Actions</h2>
             <div class="action-buttons">
+                <a href="/admin/cms" class="action-btn">
+                    <i class="fa fa-edit"></i>
+                    <div>CMS Management</div>
+                </a>
                 <a href="/admin/slider" class="action-btn">
                     <i class="fa fa-images"></i>
                     <div>Manage Hero Slider</div>
@@ -223,5 +286,24 @@
             </p>
         </div>
     </div>
+    
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+        
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target) &&
+                sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
