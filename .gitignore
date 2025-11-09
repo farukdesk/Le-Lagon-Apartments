@@ -1,0 +1,64 @@
+# Le Lagon Apartments - Git Ignore File
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE Files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# Log Files
+logs/
+*.log
+
+# Cache Files
+cache/
+*.cache
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+
+# Backup Files
+*.bak
+*.backup
+*~
+
+# Environment Files
+.env
+.env.local
+.env.production
+
+# Uploaded Files (you may want to keep these, adjust as needed)
+uploads/
+public/uploads/
+
+# Vendor/Dependencies
+vendor/
+node_modules/
+
+# Build Files
+dist/
+build/
+
+# Database Backups
+*.sql.gz
+*.sql.zip
+backup_*.sql
+
+# OS Generated Files
+.fuse_hidden*
+.directory
+.Trash-*
+
+# Security
+config/production.php
+private_keys/
