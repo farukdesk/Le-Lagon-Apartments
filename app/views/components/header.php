@@ -1,4 +1,9 @@
 <?php
+// Load required models
+require_once __DIR__ . '/../../models/HeaderContent.php';
+require_once __DIR__ . '/../../models/NavigationMenu.php';
+require_once __DIR__ . '/../../models/SocialLinks.php';
+
 // Load header data
 $headerModel = new HeaderContent();
 $navModel = new NavigationMenu();

@@ -1,4 +1,8 @@
 <?php
+// Load required models
+require_once __DIR__ . '/../../models/FooterContent.php';
+require_once __DIR__ . '/../../models/SocialLinks.php';
+
 // Load footer data
 $footerModel = new FooterContent();
 $socialModel = new SocialLinks();
