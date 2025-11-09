@@ -9,7 +9,12 @@ class Model {
     
     public function __construct() {
         require_once __DIR__ . '/../../config/database.php';
-        $this->db = Database::getInstance()->getConnection();
+        try {
+            $this->db = Database::getInstance()->getConnection();
+        } catch (Exception $e) {
+            error_log("Model initialization error: " . $e->getMessage());
+            $this->db = null;
+        }
     }
     
     /**
@@ -19,6 +24,10 @@ class Model {
      * @return array
      */
     public function all($orderBy = 'id', $order = 'ASC') {
+        if (!$this->db) {
+            error_log("Database connection not available in Model::all()");
+            return [];
+        }
         try {
             $sql = "SELECT * FROM {$this->table} ORDER BY {$orderBy} {$order}";
             $stmt = $this->db->prepare($sql);
@@ -37,6 +46,10 @@ class Model {
      * @return array
      */
     public function allActive($orderBy = 'id', $order = 'ASC') {
+        if (!$this->db) {
+            error_log("Database connection not available in Model::allActive()");
+            return [];
+        }
         try {
             $sql = "SELECT * FROM {$this->table} WHERE is_active = 1 ORDER BY {$orderBy} {$order}";
             $stmt = $this->db->prepare($sql);
@@ -54,6 +67,10 @@ class Model {
      * @return array|null
      */
     public function find($id) {
+        if (!$this->db) {
+            error_log("Database connection not available in Model::find()");
+            return null;
+        }
         try {
             $sql = "SELECT * FROM {$this->table} WHERE id = :id LIMIT 1";
             $stmt = $this->db->prepare($sql);
@@ -73,6 +90,10 @@ class Model {
      * @return array
      */
     public function where($field, $value) {
+        if (!$this->db) {
+            error_log("Database connection not available in Model::where()");
+            return [];
+        }
         try {
             $sql = "SELECT * FROM {$this->table} WHERE {$field} = :value";
             $stmt = $this->db->prepare($sql);
@@ -92,6 +113,10 @@ class Model {
      * @return array|null
      */
     public function whereFirst($field, $value) {
+        if (!$this->db) {
+            error_log("Database connection not available in Model::whereFirst()");
+            return null;
+        }
         try {
             $sql = "SELECT * FROM {$this->table} WHERE {$field} = :value LIMIT 1";
             $stmt = $this->db->prepare($sql);
@@ -187,6 +212,10 @@ class Model {
      * @return array|bool
      */
     public function query($sql, $params = []) {
+        if (!$this->db) {
+            error_log("Database connection not available in Model::query()");
+            return false;
+        }
         try {
             $stmt = $this->db->prepare($sql);
             
