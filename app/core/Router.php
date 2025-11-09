@@ -29,6 +29,19 @@ class Router {
         $this->addRoute('GET', '/admin/rooms', 'AdminController', 'rooms');
         $this->addRoute('GET', '/admin/footer', 'AdminController', 'footer');
         $this->addRoute('GET', '/admin/settings', 'AdminController', 'settings');
+        
+        // CMS Management routes
+        $this->addRoute('GET', '/admin/cms', 'AdminController', 'cms');
+        $this->addRoute('GET', '/admin/cms/logo', 'AdminController', 'cmsLogo');
+        $this->addRoute('POST', '/admin/cms/logo/update', 'AdminController', 'cmsLogoUpdate');
+        $this->addRoute('GET', '/admin/cms/menu', 'AdminController', 'cmsMenu');
+        $this->addRoute('POST', '/admin/cms/menu/create', 'AdminController', 'cmsMenuCreate');
+        $this->addRoute('POST', '/admin/cms/menu/update', 'AdminController', 'cmsMenuUpdate');
+        $this->addRoute('POST', '/admin/cms/menu/delete', 'AdminController', 'cmsMenuDelete');
+        $this->addRoute('GET', '/admin/cms/hero', 'AdminController', 'cmsHero');
+        $this->addRoute('POST', '/admin/cms/hero/create', 'AdminController', 'cmsHeroCreate');
+        $this->addRoute('POST', '/admin/cms/hero/update', 'AdminController', 'cmsHeroUpdate');
+        $this->addRoute('POST', '/admin/cms/hero/delete', 'AdminController', 'cmsHeroDelete');
     }
     
     public function addRoute($method, $path, $controller, $action, $name = null) {

@@ -38,7 +38,11 @@ temp/
 .env.production
 
 # Uploaded Files (you may want to keep these, adjust as needed)
-uploads/
+uploads/*
+!uploads/.gitkeep
+!uploads/logo/.gitkeep
+!uploads/favicon/.gitkeep
+!uploads/hero/.gitkeep
 
 # Vendor/Dependencies
 vendor/
