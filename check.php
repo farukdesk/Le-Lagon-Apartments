@@ -162,8 +162,8 @@
             <?php
             $paths = [
                 'config/database.php' => file_exists('../config/database.php'),
-                'public/index.php' => file_exists('index.php'),
-                'public/.htaccess' => file_exists('.htaccess'),
+                'index.php' => file_exists('index.php'),
+                '.htaccess' => file_exists('.htaccess'),
                 'logs/' => is_dir('../logs'),
                 'app/' => is_dir('../app'),
             ];

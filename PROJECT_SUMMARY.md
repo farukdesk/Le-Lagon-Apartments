@@ -103,8 +103,7 @@ The HTML template has been successfully converted to a **full-featured PHP MVC-b
 
 - `config/database.php` - Database connection
 - `config/database.example.php` - Template for users
-- `public/.htaccess` - URL rewriting
-- `.htaccess` - Root redirects
+- `.htaccess` - URL rewriting and security
 - `.gitignore` - Version control
 
 ---
@@ -121,19 +120,17 @@ Le-Lagon-Apartments/
 │   │   ├── frontend/    # Public website views
 │   │   └── components/  # Reusable parts
 │   └── core/            # MVC framework
+├── assets/              # CSS, JS, images (web accessible)
 ├── config/
 │   ├── database.php     # DB configuration
 │   └── database.example.php
 ├── database/
 │   ├── schema.sql       # Database structure
 │   └── sample_data.sql  # Demo content
-├── public/              # Web root
-│   ├── assets/          # CSS, JS, images
-│   ├── index.php        # Entry point
-│   ├── check.php        # System checker
-│   └── .htaccess        # URL routing
 ├── logs/                # Error logs
-├── .htaccess            # Root config
+├── index.php            # Application entry point
+├── check.php            # System checker
+├── .htaccess            # URL routing & security
 ├── .gitignore
 ├── README.md
 ├── INSTALL.md
@@ -342,4 +339,4 @@ The project has been successfully completed with a **full-featured, production-r
 - Quick start: `QUICKSTART.md`
 - Detailed setup: `INSTALL.md`
 - Overview: `README.md`
-- System check: `public/check.php`
+- System check: `check.php`

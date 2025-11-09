@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../components/header.php';
 ?>
 
-<section class="breadcrumb__area pt-200 pb-150" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/public/assets/imgs/slider/bg-10.jpg); background-size: cover; background-position: center;">
+<section class="breadcrumb__area pt-200 pb-150" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(/assets/imgs/slider/bg-10.jpg); background-size: cover; background-position: center;">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -42,25 +42,25 @@ require_once __DIR__ . '/../components/header.php';
                                             <ul>
                                                 <?php if (!empty($room['size'])): ?>
                                                     <li>
-                                                        <a href="#"><img src="/public/assets/imgs/room/maximize.png" alt=""></a> 
+                                                        <a href="#"><img src="/assets/imgs/room/maximize.png" alt=""></a> 
                                                         <?php echo htmlspecialchars($room['size']); ?>
                                                     </li>
                                                 <?php endif; ?>
                                                 <?php if (!empty($room['max_guests'])): ?>
                                                     <li>
-                                                        <a href="#"><img src="/public/assets/imgs/room/user.png" alt=""></a> 
+                                                        <a href="#"><img src="/assets/imgs/room/user.png" alt=""></a> 
                                                         <?php echo $room['max_guests']; ?> Guests
                                                     </li>
                                                 <?php endif; ?>
                                                 <?php if (!empty($room['beds'])): ?>
                                                     <li>
-                                                        <a href="#"><img src="/public/assets/imgs/room/bed.png" alt=""></a> 
+                                                        <a href="#"><img src="/assets/imgs/room/bed.png" alt=""></a> 
                                                         <?php echo $room['beds']; ?> Bed<?php echo $room['beds'] > 1 ? 's' : ''; ?>
                                                     </li>
                                                 <?php endif; ?>
                                                 <?php if (!empty($room['bathrooms'])): ?>
                                                     <li>
-                                                        <a href="#"><img src="/public/assets/imgs/room/bath.png" alt=""></a> 
+                                                        <a href="#"><img src="/assets/imgs/room/bath.png" alt=""></a> 
                                                         <?php echo $room['bathrooms']; ?> Bathroom<?php echo $room['bathrooms'] > 1 ? 's' : ''; ?>
                                                     </li>
                                                 <?php endif; ?>

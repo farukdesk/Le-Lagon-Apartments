@@ -32,27 +32,27 @@ Before you begin, ensure you have:
 #### Option A: Using FTP Client
 
 1. Connect to your server via FTP
-2. Upload all project files to your server
-3. **Important**: Your domain should point to the `/public` directory
+2. Upload all project files directly to your `public_html` directory (or your domain's root directory)
+3. **Important**: All files including `index.php`, `assets/`, `app/`, `config/`, etc. should be in the web root
 
    **Directory Structure on Server:**
    ```
-   /home/yourusername/
-   ├── public_html/          ← Point domain here or upload to here
-   │   ├── index.php
-   │   ├── .htaccess
-   │   └── assets/
+   /home/yourusername/public_html/    ← Upload all files here
+   ├── index.php
+   ├── .htaccess
+   ├── assets/
    ├── app/
    ├── config/
    ├── database/
+   ├── logs/
    └── ...
    ```
 
 #### Option B: Using cPanel File Manager
 
-1. Upload the entire project as a ZIP file
+1. Upload the entire project as a ZIP file to `public_html`
 2. Extract it in your hosting account
-3. Move contents appropriately so `/public` becomes your web root
+3. Ensure all files are directly in `public_html` (not in a subdirectory)
 
 ### 3. Configure Database Settings
 
@@ -92,11 +92,13 @@ mysql -u your_username -p your_database_name < database/sample_data.sql
 If you have SSH access:
 
 ```bash
-chmod 755 public/
-chmod 644 public/index.php
-chmod 644 public/.htaccess
+chmod 755 .
+chmod 644 index.php
+chmod 644 .htaccess
 chmod 755 logs/
 chmod 666 logs/error.log
+chmod 755 assets/
+chmod -R 644 assets/*
 ```
 
 Via cPanel File Manager:
@@ -106,7 +108,7 @@ Via cPanel File Manager:
 
 ### 6. Configure .htaccess (if needed)
 
-The `.htaccess` file in `/public` should work by default. If you experience issues:
+The `.htaccess` file in the root directory should work by default. If you experience issues:
 
 1. Ensure `mod_rewrite` is enabled (contact your host if unsure)
 2. If your site is in a subdirectory, update `RewriteBase` in `.htaccess`:
@@ -146,7 +148,7 @@ If you see errors:
 
 **Solution**:
 1. Ensure `mod_rewrite` is enabled
-2. Check `.htaccess` is in the correct location (`/public/.htaccess`)
+2. Check `.htaccess` is in the web root directory
 3. Contact your hosting provider to enable `AllowOverride All`
 
 ### Database Connection Error
@@ -164,12 +166,12 @@ If you see errors:
 **Problem**: Page loads but shows nothing
 
 **Solution**:
-1. Enable error display temporarily in `/public/index.php`:
+1. Enable error display temporarily in `index.php`:
    ```php
    ini_set('display_errors', 1);
    error_reporting(E_ALL);
    ```
-2. Check PHP error logs
+2. Check PHP error logs in `/logs/error.log`
 3. Ensure all files were uploaded
 4. Verify PHP version (7.4 or higher required)
 
@@ -178,7 +180,7 @@ If you see errors:
 **Problem**: Website loads but images don't display
 
 **Solution**:
-1. Verify assets folder is in `/public/assets/`
+1. Verify assets folder is in the root directory (`/assets/`)
 2. Check file permissions on assets folder (755)
 3. Look at browser console for 404 errors
 4. Ensure correct paths in database

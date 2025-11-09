@@ -42,7 +42,7 @@ define('DB_PASS', 'your_password');         // Your MySQL password
 
 ### Step 4: Test Installation (30 seconds)
 
-Visit: `http://yourdomain.com/public/check.php`
+Visit: `http://yourdomain.com/check.php`
 
 This will verify:
 - ✅ PHP version
@@ -110,11 +110,11 @@ All content is managed from the admin panel:
 → Check .htaccess file exists
 
 ### Blank page
-→ Enable error display in `public/index.php`
+→ Enable error display in `index.php`
 → Check PHP error logs
 
 ### Images not loading
-→ Verify assets folder is in `/public/assets/`
+→ Verify assets folder is in `/assets/`
 → Check file paths in database
 
 ---
@@ -123,7 +123,7 @@ All content is managed from the admin panel:
 
 - **Full Documentation:** See `README.md`
 - **Detailed Installation:** See `INSTALL.md`
-- **System Check:** Run `public/check.php`
+- **System Check:** Run `check.php`
 
 ---
 
